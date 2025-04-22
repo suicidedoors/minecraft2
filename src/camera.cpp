@@ -1,0 +1,57 @@
+#include "camera.hpp"
+#include "constants.hpp"
+
+static glm::vec3 position(0.0f, 0.0f, 3.0f);
+static glm::vec3 front(0.0f, 0.0f, -1.0f);
+static glm::vec3 up(0.0f, 1.0f, 0.0f);
+static float speed = 4.0f;
+static float yaw = -90.0f;  
+static float pitch = 0.0f;   
+
+
+void initCamera() {
+    SDL_SetRelativeMouseMode(SDL_TRUE);
+}
+
+void updateCamera(SDL_Event& event, float deltaTime) {
+    const Uint8* keystate = SDL_GetKeyboardState(nullptr);
+    float velocity = speed * deltaTime;
+
+    // keyboard input
+    if (keystate[SDL_SCANCODE_W]) position += front * velocity;
+    if (keystate[SDL_SCANCODE_S]) position -= front * velocity;
+    if (keystate[SDL_SCANCODE_A]) position -= glm::normalize(glm::cross(front, up)) * velocity;
+    if (keystate[SDL_SCANCODE_D]) position += glm::normalize(glm::cross(front, up)) * velocity;
+    if (keystate[SDL_SCANCODE_SPACE]) position += up * velocity;
+    if (keystate[SDL_SCANCODE_LSHIFT]) position -= up * velocity;
+
+    if (keystate[SDL_SCANCODE_UP]) pitch -= arrow_sensitivity; 
+    if (keystate[SDL_SCANCODE_LEFT]) yaw -= arrow_sensitivity; 
+    if (keystate[SDL_SCANCODE_RIGHT]) yaw += arrow_sensitivity; 
+    if (keystate[SDL_SCANCODE_DOWN]) pitch += arrow_sensitivity; 
+
+    // mouse input
+    int xRel, yRel;
+    SDL_GetRelativeMouseState(&xRel, &yRel);
+
+    float xOffset = xRel * mouse_sensitivity;
+    float yOffset = yRel * mouse_sensitivity;
+    
+    yaw += xOffset;
+    pitch -= yOffset;
+    
+    if (pitch > 89.0f) pitch = 89.0f;
+    if (pitch < -89.0f) pitch = -89.0f;
+    
+    glm::vec3 frontDirection;
+    frontDirection.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    frontDirection.y = sin(glm::radians(pitch));
+    frontDirection.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    front = glm::normalize(frontDirection);
+
+    
+}
+
+glm::mat4 getViewMatrix() {
+    return glm::lookAt(position, position + front, up);
+}
