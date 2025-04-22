@@ -1,6 +1,6 @@
 # Controls
 
-** Movement (WASD + Space/Shift)
+**Movement (WASD + Space/Shift)**
 
 W – Move forward
 
@@ -14,7 +14,7 @@ SPACE – Move up
 
 LEFT SHIFT – Move down
 
-** Camera Rotation (Arrow Keys or Mouse)
+**Camera Rotation (Arrow Keys or Mouse)**
 
 UP ARROW – Look down
 
