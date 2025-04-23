@@ -3,17 +3,23 @@
 #include "cube.hpp"
 #include "camera.hpp"
 #include "constants.hpp"
+#include "textures.hpp"
 
 int main() {
     if (!initWindow()) return -1;
     initCamera();
+    glEnable(GL_DEPTH_TEST);
     GLuint shaderProgram = createShaderProgram();
     GLuint VAO = createCubeVAO();
     GLuint viewLoc = glGetUniformLocation(shaderProgram, "view");
     glLinkProgram(shaderProgram);
     glm::mat4 view = getViewMatrix();  
 
-    glClearColor(0.1f, 0.2f, 0.2f, 1.0f);
+    GLuint texture = loadTexture("../assets/grass.png");
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texture);
+
+
     bool running = true;
     SDL_Event event;
     Uint32 lastTime = SDL_GetTicks();
@@ -42,8 +48,6 @@ int main() {
         glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
         glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
-        glm::mat4 view = getViewMatrix();
-        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
         SDL_GL_SwapWindow(getWindow());
@@ -52,3 +56,4 @@ int main() {
     destroyWindow();
     return 0;
 }
+

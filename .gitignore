@@ -19,5 +19,4 @@ Thumbs.db
 
 # Ignore CMake cache and settings
 CMakeCache.txt
-CMakeFiles/
-Makefile
+qMakefile
