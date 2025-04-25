@@ -8,7 +8,7 @@
 
 int main() {
     if (!initWindow()) return -1;
-    initCamera();
+    Camera camera;
     glEnable(GL_DEPTH_TEST);
 
     Cube cube;
@@ -47,8 +47,8 @@ int main() {
         float deltaTime = (currentTime - lastTime) / 1000.0f;
         lastTime = currentTime;
 
-        updateCamera(event, deltaTime);
-        glm::mat4 view = getViewMatrix();
+        camera.update(event, deltaTime);
+        glm::mat4 view = camera.getViewMatrix();
         glm::mat4 projection = glm::perspective(glm::radians(60.0f), 
                               (float)SCREEN_WIDTH / SCREEN_HEIGHT, 0.1f, 100.0f);
 

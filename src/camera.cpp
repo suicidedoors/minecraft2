@@ -1,19 +1,17 @@
 #include "camera.hpp"
 #include "constants.hpp"
 
-static glm::vec3 position(0.0f, 0.0f, 3.0f);
-static glm::vec3 front(0.0f, 0.0f, -1.0f);
-static glm::vec3 up(0.0f, 1.0f, 0.0f);
-static float speed = 4.0f;
-static float yaw = -90.0f;  
-static float pitch = 0.0f;   
-
-
-void initCamera() {
+Camera::Camera()
+    : position(0.0f, 0.0f, 3.0f), 
+    front(0.0f, 0.0f, -1.0f),
+    up(0.0f, 1.0f, 0.0f), 
+    speed(4.0f), 
+    yaw(-90.0f), 
+    pitch(0.0f) {
     SDL_SetRelativeMouseMode(SDL_TRUE);
 }
 
-void updateCamera(SDL_Event& event, float deltaTime) {
+void Camera::update(SDL_Event& event, float deltaTime) {
     const Uint8* keystate = SDL_GetKeyboardState(nullptr);
     float velocity = speed * deltaTime;
 
@@ -47,11 +45,11 @@ void updateCamera(SDL_Event& event, float deltaTime) {
     frontDirection.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
     frontDirection.y = sin(glm::radians(pitch));
     frontDirection.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-    front = glm::normalize(frontDirection);
-
-    
+    front = glm::normalize(frontDirection);    
 }
 
-glm::mat4 getViewMatrix() {
+glm::mat4 Camera::getViewMatrix() const{
     return glm::lookAt(position, position + front, up);
 }
+
+
