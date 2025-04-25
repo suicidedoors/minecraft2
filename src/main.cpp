@@ -18,12 +18,12 @@ int main() {
 
     GLuint skyboxVAO = createSkyboxVAO();
     std::vector<std::string> faces = {
-        "../assets/skybox/right.png",
-        "../assets/skybox/left.png",
-        "../assets/skybox/top.png",
-        "../assets/skybox/bottom.png",
-        "../assets/skybox/front.png",
-        "../assets/skybox/back.png"
+        "../assets/skybox/right.bmp",
+        "../assets/skybox/left.bmp",
+        "../assets/skybox/top.bmp",
+        "../assets/skybox/bottom.bmp",
+        "../assets/skybox/front.bmp",
+        "../assets/skybox/back.bmp"
     };
     GLuint cubemapTexture = loadCubemap(faces);
     GLuint skyboxShader = createSkyboxShaderProgram();
