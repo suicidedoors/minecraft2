@@ -16,16 +16,7 @@ int main() {
     GLuint shaderProgram = createShaderProgram();
     GLuint texture = loadTexture("../assets/grass.png");
 
-    GLuint skyboxVAO = createSkyboxVAO();
-    std::vector<std::string> faces = {
-        "../assets/skybox/right.bmp",
-        "../assets/skybox/left.bmp",
-        "../assets/skybox/top.bmp",
-        "../assets/skybox/bottom.bmp",
-        "../assets/skybox/front.bmp",
-        "../assets/skybox/back.bmp"
-    };
-    GLuint cubemapTexture = loadCubemap(faces);
+    Skybox skybox;
     GLuint skyboxShader = createSkyboxShaderProgram();
 
     glUseProgram(shaderProgram);
@@ -63,9 +54,9 @@ int main() {
         glUniformMatrix4fv(glGetUniformLocation(skyboxShader, "projection"), 
                           1, GL_FALSE, glm::value_ptr(projection));
         
-        glBindVertexArray(skyboxVAO);
+        glBindVertexArray(skybox.getVAO());
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, skybox.getTextureID());
         glDrawArrays(GL_TRIANGLES, 0, 36);
         glDepthFunc(GL_LESS); 
 
@@ -83,7 +74,6 @@ int main() {
     }
 
     glDeleteTextures(1, &texture);
-    glDeleteTextures(1, &cubemapTexture);
     glDeleteProgram(shaderProgram);
     glDeleteProgram(skyboxShader);
 
