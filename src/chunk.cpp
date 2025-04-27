@@ -46,12 +46,19 @@ float cubeVertices[] = {
 Chunk::Chunk() {
     setupMesh();
     GLuint stoneTex = loadTexture("../assets/stone.png");
+    GLuint dirtTex = loadTexture("../assets/dirt.png");
     GLuint grassTex = loadTexture("../assets/grass.png");
 
     for (int x = 0; x < CHUNK_SIZE; ++x)
         for (int y = 0; y < CHUNK_SIZE; ++y)
             for (int z = 0; z < CHUNK_SIZE; ++z)
-                blocks[x][y][z] = (y < CHUNK_SIZE/2) ? Block{GRASS, grassTex} : Block{AIR, 0};
+                if (y > CHUNK_SIZE / 2){
+                    blocks[x][y][z] = Block{AIR, 0};
+                } else if (y > CHUNK_SIZE / 2 - 1){
+                    blocks[x][y][z] = Block{GRASS, grassTex};
+                } else if (y > CHUNK_SIZE /2 - 3){
+                    blocks[x][y][z] = Block{DIRT, dirtTex};
+                } else { blocks[x][y][z] = Block{STONE, stoneTex};};
 }
 
 void Chunk::setupMesh() {

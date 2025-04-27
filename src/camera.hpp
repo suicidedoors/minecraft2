@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SDL2/SDL.h>
-#include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 class Camera {
@@ -9,6 +8,7 @@ class Camera {
         Camera();
         void update(SDL_Event& event, float deltaTime);
         glm::mat4 getViewMatrix() const;
+        glm::vec3 getPosition() const;
 
     private:
         glm::vec3 position;

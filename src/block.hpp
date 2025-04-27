@@ -1,7 +1,7 @@
 #pragma once
 #include <GL/glew.h>
 
-enum BlockType {
+enum BlockType : uint8_t {
     AIR,
     STONE,
     GRASS,
@@ -10,6 +10,6 @@ enum BlockType {
 };
 
 struct Block {
-    BlockType type = AIR;
-    GLuint textureID = 0;
+    BlockType type;
+    GLuint textureID;
 };
