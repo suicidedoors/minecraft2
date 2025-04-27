@@ -85,6 +85,15 @@ void Chunk::render(GLuint shaderProgram) {
                 Block& block = blocks[x][y][z];
                 if (block.type == AIR) continue;
 
+                bool exposed = false;
+                if (blocks[x][y + 1][z].type == AIR) exposed = true; // Top
+                if (y == 0 || blocks[x][y - 1][z].type == AIR) exposed = true; // Bottom
+                if (x == 0 || blocks[x - 1][y][z].type == AIR) exposed = true; // Left
+                if (x == CHUNK_SIZE - 1 || blocks[x + 1][y][z].type == AIR) exposed = true; // Right
+                if (z == 0 || blocks[x][y][z - 1].type == AIR) exposed = true; // Front
+                if (z == CHUNK_SIZE - 1 || blocks[x][y][z + 1].type == AIR) exposed = true; // Back
+                if (!exposed) continue; 
+
                 glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(x, y, z));
                 glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
