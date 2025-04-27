@@ -11,10 +11,14 @@ int main() {
     Camera camera;
     glEnable(GL_DEPTH_TEST);
 
-    Cube cube;
-    cube.init(); 
+    Cube stoneBlock, grassBlock, dirtBlock;
+    stoneBlock.init(); 
+    grassBlock.init();
+    dirtBlock.init();
     GLuint shaderProgram = createShaderProgram();
-    GLuint texture = loadTexture("../assets/grass.png");
+    GLuint texture1 = loadTexture("../assets/stone.png");
+    GLuint texture2 = loadTexture("../assets/grass.png");
+    GLuint texture3 = loadTexture("../assets/dirt.png");
 
     Skybox skybox;
     GLuint skyboxShader = createSkyboxShaderProgram();
@@ -40,8 +44,7 @@ int main() {
 
         camera.update(event, deltaTime);
         glm::mat4 view = camera.getViewMatrix();
-        glm::mat4 projection = glm::perspective(glm::radians(60.0f), 
-                              (float)SCREEN_WIDTH / SCREEN_HEIGHT, 0.1f, 100.0f);
+        glm::mat4 projection = glm::perspective(glm::radians(60.0f), (float)SCREEN_WIDTH / SCREEN_HEIGHT, 0.1f, 100.0f);
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
  
@@ -49,10 +52,8 @@ int main() {
         glUseProgram(skyboxShader);
         
         glm::mat4 skyboxView = glm::mat4(glm::mat3(view));
-        glUniformMatrix4fv(glGetUniformLocation(skyboxShader, "view"), 
-                          1, GL_FALSE, glm::value_ptr(skyboxView));
-        glUniformMatrix4fv(glGetUniformLocation(skyboxShader, "projection"), 
-                          1, GL_FALSE, glm::value_ptr(projection));
+        glUniformMatrix4fv(glGetUniformLocation(skyboxShader, "view"), 1, GL_FALSE, glm::value_ptr(skyboxView));
+        glUniformMatrix4fv(glGetUniformLocation(skyboxShader, "projection"),  1, GL_FALSE, glm::value_ptr(projection));
         
         glBindVertexArray(skybox.getVAO());
         glActiveTexture(GL_TEXTURE0);
@@ -62,18 +63,30 @@ int main() {
 
         glUseProgram(shaderProgram);
         glm::mat4 model = glm::mat4(1.0f);
-        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 
-                          1, GL_FALSE, glm::value_ptr(model));
-        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "view"), 
-                          1, GL_FALSE, glm::value_ptr(view));
-        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 
-                          1, GL_FALSE, glm::value_ptr(projection));
+        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "view"), 1, GL_FALSE, glm::value_ptr(view));
+        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
-        cube.draw(shaderProgram); 
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture1);
+        dirtBlock.draw(shaderProgram);
+
+        glm::mat4 model2 = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 0.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model2));
+        glBindTexture(GL_TEXTURE_2D, texture2);
+        stoneBlock.draw(shaderProgram);
+
+        glm::mat4 model3 = glm::translate(glm::mat4(1.0f), glm::vec3(-2.0f, 0.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model3));
+        glBindTexture(GL_TEXTURE_2D, texture3);
+        grassBlock.draw(shaderProgram);
+
         SDL_GL_SwapWindow(getWindow());
     }
 
-    glDeleteTextures(1, &texture);
+    glDeleteTextures(1, &texture1);
+    glDeleteTextures(1, &texture2);
+    glDeleteTextures(1, &texture3);
     glDeleteProgram(shaderProgram);
     glDeleteProgram(skyboxShader);
 
