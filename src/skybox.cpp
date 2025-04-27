@@ -50,7 +50,7 @@ Skybox::Skybox() {
         "../assets/skybox/left.bmp",
         "../assets/skybox/top.bmp",
         "../assets/skybox/bottom.bmp",
-        "../assets/skybox/front1.bmp",
+        "../assets/skybox/front.bmp",
         "../assets/skybox/back.bmp"
     };
     init();
