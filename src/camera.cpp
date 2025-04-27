@@ -2,7 +2,7 @@
 #include "constants.hpp"
 
 Camera::Camera()
-    : position(0.0f, 0.0f, 3.0f), 
+    : position(STARTING_CAMERA_POSITION),
     front(0.0f, 0.0f, -1.0f),
     up(0.0f, 1.0f, 0.0f), 
     speed(4.0f), 
@@ -23,17 +23,17 @@ void Camera::update(SDL_Event& event, float deltaTime) {
     if (keystate[SDL_SCANCODE_SPACE]) position += up * velocity;
     if (keystate[SDL_SCANCODE_LSHIFT]) position -= up * velocity;
 
-    if (keystate[SDL_SCANCODE_UP]) pitch -= arrow_sensitivity; 
-    if (keystate[SDL_SCANCODE_LEFT]) yaw -= arrow_sensitivity; 
-    if (keystate[SDL_SCANCODE_RIGHT]) yaw += arrow_sensitivity; 
-    if (keystate[SDL_SCANCODE_DOWN]) pitch += arrow_sensitivity; 
+    if (keystate[SDL_SCANCODE_UP]) pitch -= ARROW_SENSITIVITY; 
+    if (keystate[SDL_SCANCODE_LEFT]) yaw -= ARROW_SENSITIVITY; 
+    if (keystate[SDL_SCANCODE_RIGHT]) yaw += ARROW_SENSITIVITY; 
+    if (keystate[SDL_SCANCODE_DOWN]) pitch += ARROW_SENSITIVITY; 
 
     // mouse input
     int xRel, yRel;
     SDL_GetRelativeMouseState(&xRel, &yRel);
 
-    float xOffset = xRel * mouse_sensitivity;
-    float yOffset = yRel * mouse_sensitivity;
+    float xOffset = xRel * MOUSE_SENSITIVITY;
+    float yOffset = yRel * MOUSE_SENSITIVITY;
     
     yaw += xOffset;
     pitch -= yOffset;

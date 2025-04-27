@@ -1,24 +1,18 @@
 #include "window.hpp"
 #include "shader.hpp"
-#include "cube.hpp"
 #include "camera.hpp"
 #include "constants.hpp"
 #include "textures.hpp"
 #include "skybox.hpp"
+#include "chunk.hpp"
 
 int main() {
     if (!initWindow()) return -1;
     Camera camera;
     glEnable(GL_DEPTH_TEST);
 
-    Cube stoneBlock, grassBlock, dirtBlock;
-    stoneBlock.init(); 
-    grassBlock.init();
-    dirtBlock.init();
+    Chunk chunk;
     GLuint shaderProgram = createShaderProgram();
-    GLuint texture1 = loadTexture("../assets/stone.png");
-    GLuint texture2 = loadTexture("../assets/grass.png");
-    GLuint texture3 = loadTexture("../assets/dirt.png");
 
     Skybox skybox;
     GLuint skyboxShader = createSkyboxShaderProgram();
@@ -67,26 +61,10 @@ int main() {
         glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "view"), 1, GL_FALSE, glm::value_ptr(view));
         glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture1);
-        dirtBlock.draw(shaderProgram);
-
-        glm::mat4 model2 = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 0.0f, 0.0f));
-        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model2));
-        glBindTexture(GL_TEXTURE_2D, texture2);
-        stoneBlock.draw(shaderProgram);
-
-        glm::mat4 model3 = glm::translate(glm::mat4(1.0f), glm::vec3(-2.0f, 0.0f, 0.0f));
-        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model3));
-        glBindTexture(GL_TEXTURE_2D, texture3);
-        grassBlock.draw(shaderProgram);
+        chunk.render(shaderProgram);
 
         SDL_GL_SwapWindow(getWindow());
     }
-
-    glDeleteTextures(1, &texture1);
-    glDeleteTextures(1, &texture2);
-    glDeleteTextures(1, &texture3);
     glDeleteProgram(shaderProgram);
     glDeleteProgram(skyboxShader);
 

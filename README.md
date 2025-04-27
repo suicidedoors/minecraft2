@@ -1,3 +1,5 @@
+sudo pacman -S sdl2 glm glew mesa libglvnd
+
 # Controls
 
 **Movement (WASD + Space/Shift)**
