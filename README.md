@@ -6,8 +6,8 @@ sudo pacman -S sdl2 glm glew mesa libglvnd
 
 **W** – Move forward  
 **S** – Move backward  
-**A** – Move left 
-**D** – Move right 
+**A** – Move left  
+**D** – Move right  
 **SPACE** – Move up  
 **LEFT SHIFT** – Move down  
 
