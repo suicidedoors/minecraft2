@@ -1,6 +1,6 @@
 #include "camera.hpp"
-#include "constants.hpp"
-#include "chunk.hpp"
+#include "../constants.hpp"
+#include "../chunk.hpp"
 
 Camera::Camera()
     : position(STARTING_CAMERA_POSITION),

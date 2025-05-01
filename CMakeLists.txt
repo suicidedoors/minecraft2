@@ -3,9 +3,10 @@ project(Minecraft2)
 
 set(CMAKE_CXX_STANDARD 17)
 
-# Source files
+# Source files, now including src/player
 file(GLOB SRC_FILES
     src/*.cpp
+    src/player/*.cpp  # Including files from the 'player' folder
 )
 
 add_executable(minecraft2 ${SRC_FILES})
@@ -16,6 +17,7 @@ find_library(SDL2_LIBRARY SDL2)
 
 include_directories(${SDL2_INCLUDE_DIR})
 target_link_libraries(minecraft2
-${SDL2_LIBRARY}
-GLEW 
-OpenGL::GL)
+    ${SDL2_LIBRARY}
+    GLEW 
+    OpenGL::GL
+)

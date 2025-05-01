@@ -18,3 +18,8 @@ sudo pacman -S sdl2 glm glew mesa libglvnd
 **LEFT ARROW** – Turn left  
 **RIGHT ARROW** – Turn right  
 **MOUSE MOVEMENT** – Freely look around
+
+**Interacting with world**
+
+**LEFT CLICK/BACKSPACE** - Break block  
+**RIGHT CLICK/BACKQUOTE** - Place block  

@@ -49,6 +49,7 @@ Chunk::Chunk() {
     GLuint dirtTex = loadTexture("../assets/dirt.png");
     GLuint grassTex = loadTexture("../assets/grass.png");
 
+
     for (int x = 0; x < CHUNK_SIZE; ++x)
         for (int y = 0; y < CHUNK_SIZE; ++y)
             for (int z = 0; z < CHUNK_SIZE; ++z)
