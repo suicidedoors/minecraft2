@@ -99,9 +99,22 @@ void Chunk::render(GLuint shaderProgram) {
 
                 glActiveTexture(GL_TEXTURE0);
                 glBindTexture(GL_TEXTURE_2D, block.textureID);
-
                 glDrawArrays(GL_TRIANGLES, 0, 36);
             }
         }
     }
+}
+
+Block Chunk::getBlock(const glm::ivec3& pos) const {
+    return blocks[pos.x][pos.y][pos.z];
+}
+
+void Chunk::setBlock(const glm::ivec3& pos, const Block& block) {
+    blocks[pos.x][pos.y][pos.z] = block;
+}
+
+bool Chunk::isInside(const glm::ivec3& pos) const {
+    return pos.x >= 0 && pos.x < CHUNK_SIZE &&
+           pos.y >= 0 && pos.y < CHUNK_SIZE &&
+           pos.z >= 0 && pos.z < CHUNK_SIZE;
 }

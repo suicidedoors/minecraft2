@@ -7,8 +7,10 @@ class Camera {
     public:
         Camera();
         void update(SDL_Event& event, float deltaTime);
-        glm::mat4 getViewMatrix() const;
-        glm::vec3 getPosition() const;
+
+        glm::mat4 getViewMatrix() const{return glm::lookAt(position, position + front, up);}
+        glm::vec3 getPosition() const {return position;}
+        glm::vec3 getFront() const { return front;}
 
     private:
         glm::vec3 position;
@@ -18,3 +20,4 @@ class Camera {
         float yaw;
         float pitch;
 };
+

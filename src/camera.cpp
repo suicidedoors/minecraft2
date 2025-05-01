@@ -1,5 +1,6 @@
 #include "camera.hpp"
 #include "constants.hpp"
+#include "chunk.hpp"
 
 Camera::Camera()
     : position(STARTING_CAMERA_POSITION),
@@ -48,10 +49,4 @@ void Camera::update(SDL_Event& event, float deltaTime) {
     front = glm::normalize(frontDirection);    
 }
 
-glm::mat4 Camera::getViewMatrix() const{
-    return glm::lookAt(position, position + front, up);
-}
 
-glm::vec3 Camera::getPosition() const {
-    return position;
-}

@@ -6,6 +6,7 @@ enum BlockType : uint8_t {
     STONE,
     GRASS,
     DIRT,
+    SNOW,
     WATER
 };
 
