@@ -4,6 +4,8 @@
 #include "../constants.hpp"
 #include <GL/glew.h>
 
+extern std::unordered_map<BlockType, GLuint> blockTextures;
+
 bool raycastBlockInChunk(
     Chunk& chunk,
     const glm::vec3& origin,
@@ -12,5 +14,5 @@ bool raycastBlockInChunk(
     glm::ivec3& hitPos,
     glm::ivec3& hitNormal,
     bool place,
-    GLuint tex
+    BlockType picked_block
 );

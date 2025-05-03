@@ -1,12 +1,21 @@
 #include "window.hpp"
 #include "world.hpp"
+#include <random>
+
+std::unordered_map<BlockType, GLuint> blockTextures;
+
+BlockType getRandomBlock() {
+    return static_cast<BlockType>(rand() % blockTextures.size()); 
+}
 
 int main() {
     if (!initWindow()) return -1;
-
-    GLuint tex = loadTexture("../assets/blocks/snow.png");
+    std::unordered_map<BlockType, GLuint> blockTextures;
+    loadAllTextures();
 
     World world;
+
+    BlockType picked_block = getRandomBlock();
 
     bool running = true;
     SDL_Event event;
@@ -21,7 +30,7 @@ int main() {
                 glm::ivec3 hitPos, hitNormal;
                 
                 bool mode = (event.button.button == SDL_BUTTON_RIGHT);
-                raycastBlockInChunk(world.getChunk(), origin, direction, MAX_DISTANCE, hitPos, hitNormal, mode, tex);
+                raycastBlockInChunk(world.getChunk(), origin, direction, MAX_DISTANCE, hitPos, hitNormal, mode, picked_block);
             }
             if (event.type == SDL_KEYDOWN) {
                 if (event.key.keysym.sym == SDLK_BACKSPACE || event.key.keysym.sym == SDLK_BACKQUOTE) {
@@ -29,11 +38,11 @@ int main() {
                     glm::vec3 direction = world.getCamera().getFront();
                     glm::ivec3 hitPos, hitNormal;
                     bool mode = (event.key.keysym.sym == SDLK_BACKQUOTE);
-                    raycastBlockInChunk(world.getChunk(), origin, direction, MAX_DISTANCE, hitPos, hitNormal, mode, tex);
+                    raycastBlockInChunk(world.getChunk(), origin, direction, MAX_DISTANCE, hitPos, hitNormal, mode, picked_block);
                 }
             }
         }
-
+    
         Uint32 currentTime = SDL_GetTicks();
         float deltaTime = (currentTime - lastTime) / 1000.0f;
         lastTime = currentTime;

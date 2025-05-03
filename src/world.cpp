@@ -43,7 +43,7 @@ void World::render(SDL_Event event, float deltaTime){
         glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model));
         glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "view"), 1, GL_FALSE, glm::value_ptr(view));
         glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-        chunk.render(shaderProgram);
+        chunk.render(shaderProgram, projection * view);
 
         crosshair.renderCrosshair(crosshairShader);
 }

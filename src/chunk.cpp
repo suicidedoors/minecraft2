@@ -45,10 +45,6 @@ float cubeVertices[] = {
 
 Chunk::Chunk() {
     setupMesh();
-    GLuint dirtTex = loadTexture("../assets/blocks/dirt.png");
-    GLuint stoneTex = loadTexture("../assets/blocks/stone.png");
-    GLuint grassTex = loadTexture("../assets/blocks/grass.png");
-
 
     for (int x = 0; x < CHUNK_SIZE; ++x)
         for (int y = 0; y < CHUNK_SIZE; ++y)
@@ -56,10 +52,10 @@ Chunk::Chunk() {
                 if (y > CHUNK_SIZE / 2){
                     blocks[x][y][z] = Block{AIR, 0};
                 } else if (y > CHUNK_SIZE / 2 - 1){
-                    blocks[x][y][z] = Block{GRASS, grassTex};
+                    blocks[x][y][z] = Block{GRASS, blockTextures[GRASS]};
                 } else if (y > CHUNK_SIZE /2 - 3){
-                    blocks[x][y][z] = Block{DIRT, dirtTex};
-                } else { blocks[x][y][z] = Block{STONE, stoneTex};};
+                    blocks[x][y][z] = Block{DIRT, blockTextures[DIRT]};
+                } else { blocks[x][y][z] = Block{STONE, blockTextures[getRandomBlock()]};};
 }
 
 void Chunk::setupMesh() {
@@ -77,7 +73,7 @@ void Chunk::setupMesh() {
     glEnableVertexAttribArray(1);
 }
 
-void Chunk::render(GLuint shaderProgram) {
+void Chunk::render(GLuint shaderProgram, const glm::mat4& viewProj) {
     glBindVertexArray(VAO);
 
     for (int x = 0; x < CHUNK_SIZE; ++x) {

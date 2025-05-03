@@ -10,7 +10,7 @@ bool raycastBlockInChunk(
     glm::ivec3& hitPos,
     glm::ivec3& hitNormal,
     bool place,
-    GLuint tex){
+    BlockType picked_block){
 
     glm::vec3 rayStep = glm::sign(direction);
     glm::vec3 delta = glm::abs(1.0f / direction);
@@ -40,7 +40,7 @@ bool raycastBlockInChunk(
                 if (place) {
                     glm::ivec3 placePos = hitPos + hitNormal;
                     if (chunk.isInside(placePos)) {
-                        chunk.setBlock(placePos, Block{SNOW, tex});
+                        chunk.setBlock(placePos, Block{picked_block, blockTextures[picked_block]});
                     }
                 } else {
                     chunk.setBlock(hitPos, Block{AIR, 0});

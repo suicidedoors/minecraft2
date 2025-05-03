@@ -18,21 +18,21 @@ enum BlockType : uint8_t {
     EMERALD,
 
     WHITE,
-    ORANGE,
-    MAGENTA,
-    LIGHT_BLUE,
-    YELLOW,
-    LIME,
-    GREEN,
-    CYAN,
-    BLUE,
-    PURPLE,
-    PINK,
-    GRAY,
-    LIGHT_GRAY,
-    BROWN,
-    BLACK,
-    RED,
+    // ORANGE,
+    // MAGENTA,
+    // LIGHT_BLUE,
+    // YELLOW,
+    // LIME,
+    // GREEN,
+    // CYAN,
+    // BLUE,
+    // PURPLE,
+    // PINK,
+    // GRAY,
+    // LIGHT_GRAY,
+    // BROWN,
+    // BLACK,
+    // RED,
 
     SAND,
     GRAVEL,
@@ -45,6 +45,6 @@ enum BlockType : uint8_t {
 };
 
 struct Block {
-    BlockType type;
-    GLuint textureID;
+    BlockType type = AIR;
+    GLuint textureID = 0;
 };
