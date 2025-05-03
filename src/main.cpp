@@ -4,7 +4,7 @@
 int main() {
     if (!initWindow()) return -1;
 
-    GLuint tex = loadTexture("../assets/hud.png");
+    GLuint tex = loadTexture("../assets/blocks/snow.png");
 
     World world;
 
@@ -20,7 +20,7 @@ int main() {
                 glm::vec3 direction = world.getCamera().getFront();
                 glm::ivec3 hitPos, hitNormal;
                 
-                bool mode = (event.button.button == SDL_BUTTON_LEFT);
+                bool mode = (event.button.button == SDL_BUTTON_RIGHT);
                 raycastBlockInChunk(world.getChunk(), origin, direction, MAX_DISTANCE, hitPos, hitNormal, mode, tex);
             }
             if (event.type == SDL_KEYDOWN) {

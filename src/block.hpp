@@ -3,11 +3,45 @@
 
 enum BlockType : uint8_t {
     AIR,
-    STONE,
+    
+    SNOW,
     GRASS,
     DIRT,
-    SNOW,
-    WATER
+    STONE,
+    WOOD,
+    PLANKS,
+    BRICKS,
+    IRON, 
+    COAL,
+    GOLD,
+    DIAMOND,
+    EMERALD,
+
+    WHITE,
+    ORANGE,
+    MAGENTA,
+    LIGHT_BLUE,
+    YELLOW,
+    LIME,
+    GREEN,
+    CYAN,
+    BLUE,
+    PURPLE,
+    PINK,
+    GRAY,
+    LIGHT_GRAY,
+    BROWN,
+    BLACK,
+    RED,
+
+    SAND,
+    GRAVEL,
+
+    GLASS,
+    LEAVES,
+
+    WATER,
+    LAVA
 };
 
 struct Block {

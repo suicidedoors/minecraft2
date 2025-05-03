@@ -1,4 +1,3 @@
-
 #include "crosshair.hpp"
 
 const char* crosshairVert = R"(
