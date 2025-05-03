@@ -1,5 +1,9 @@
+# Minecraft 2 - it's like minecraft but better
+
+need ts to run:
 sudo pacman -S sdl2 glm glew mesa libglvnd
 
+What you can do in-game:
 ![Screenshots](assets/screenshot.jpg)
 
 # Controls
