@@ -1,12 +1,7 @@
 #include "window.hpp"
 #include "world.hpp"
-#include <random>
 
 std::unordered_map<BlockType, GLuint> blockTextures;
-
-BlockType getRandomBlock() {
-    return static_cast<BlockType>(rand() % blockTextures.size()); 
-}
 
 int main() {
     stbi_set_flip_vertically_on_load(true);
@@ -41,6 +36,19 @@ int main() {
                     bool mode = (event.key.keysym.sym == SDLK_BACKQUOTE);
                     raycastBlockInChunk(world.getChunk(), origin, direction, MAX_DISTANCE, hitPos, hitNormal, mode, picked_block);
                 }
+                switch (event.key.keysym.sym) {
+                    case SDLK_1: picked_block = SNOW; break;
+                    case SDLK_2: picked_block = GRASS; break;
+                    case SDLK_3: picked_block = WATER; break;
+                    case SDLK_4: picked_block = GLASS; break;
+                    case SDLK_5: picked_block = SAND; break;
+                    case SDLK_6: picked_block = GRAVEL; break;
+                    case SDLK_7: picked_block = PLANKS; break;
+                    case SDLK_8: picked_block = BRICKS; break;
+                    case SDLK_9: picked_block = WOOD; break;
+                    case SDLK_0: picked_block = LEAVES; break;
+                }
+
             }
         }
     

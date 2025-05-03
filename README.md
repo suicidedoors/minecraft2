@@ -1,5 +1,7 @@
 sudo pacman -S sdl2 glm glew mesa libglvnd
 
+![Screenshots](assets/screenshot.jpg)
+
 # Controls
 
 **Movement (WASD + Space/Shift)**
@@ -23,3 +25,4 @@ sudo pacman -S sdl2 glm glew mesa libglvnd
 
 **LEFT CLICK/BACKSPACE** - Break block  
 **RIGHT CLICK/BACKQUOTE** - Place block  
+**1 - 9 To switch blocks**

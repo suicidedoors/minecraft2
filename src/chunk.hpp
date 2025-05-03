@@ -6,7 +6,6 @@
 
 const int CHUNK_SIZE = 16;
 extern std::unordered_map<BlockType, GLuint> blockTextures;
-extern BlockType getRandomBlock();
 
 class Chunk {
     public:        

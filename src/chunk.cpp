@@ -3,6 +3,11 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <random>
+
+BlockType getRandomBlock(int start, int end) {
+    return static_cast<BlockType>(rand() % (end - start) + start); 
+}
 
 float cubeVertices[] = {
     -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
@@ -55,7 +60,9 @@ Chunk::Chunk() {
                     blocks[x][y][z] = Block{GRASS, blockTextures[GRASS]};
                 } else if (y > CHUNK_SIZE /2 - 3){
                     blocks[x][y][z] = Block{DIRT, blockTextures[DIRT]};
-                } else { blocks[x][y][z] = Block{STONE, blockTextures[getRandomBlock()]};};
+                } else if (y > CHUNK_SIZE /2 - 6){
+                    blocks[x][y][z] = Block{DIRT, blockTextures[getRandomBlock(7, 11)]};
+                } else { blocks[x][y][z] = Block{STONE, blockTextures[getRandomBlock(11, 14)]};};
 }
 
 void Chunk::setupMesh() {
