@@ -9,7 +9,7 @@ sudo pacman -S sdl2 glm glew mesa libglvnd
 **A** – Move left  
 **D** – Move right  
 **SPACE** – Move up  
-**LEFT SHIFT** – Move down  
+**LEFT CTRL** – Move down  
 
 **Camera Rotation (Arrow Keys & Mouse)**
 

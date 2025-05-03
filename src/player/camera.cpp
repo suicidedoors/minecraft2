@@ -17,12 +17,13 @@ void Camera::update(SDL_Event& event, float deltaTime) {
     float velocity = speed * deltaTime;
 
     // keyboard input
+    if (keystate[SDL_SCANCODE_LSHIFT]) velocity *= 2;
     if (keystate[SDL_SCANCODE_W]) position += front * velocity;
     if (keystate[SDL_SCANCODE_S]) position -= front * velocity;
     if (keystate[SDL_SCANCODE_A]) position -= glm::normalize(glm::cross(front, up)) * velocity;
     if (keystate[SDL_SCANCODE_D]) position += glm::normalize(glm::cross(front, up)) * velocity;
     if (keystate[SDL_SCANCODE_SPACE]) position += up * velocity;
-    if (keystate[SDL_SCANCODE_LSHIFT]) position -= up * velocity;
+    if (keystate[SDL_SCANCODE_LCTRL]) position -= up * velocity;
 
     if (keystate[SDL_SCANCODE_UP]) pitch -= ARROW_SENSITIVITY; 
     if (keystate[SDL_SCANCODE_LEFT]) yaw -= ARROW_SENSITIVITY; 

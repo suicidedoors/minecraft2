@@ -9,13 +9,14 @@ BlockType getRandomBlock() {
 }
 
 int main() {
+    stbi_set_flip_vertically_on_load(true);
     if (!initWindow()) return -1;
     std::unordered_map<BlockType, GLuint> blockTextures;
     loadAllTextures();
 
     World world;
 
-    BlockType picked_block = getRandomBlock();
+    BlockType picked_block = SNOW;
 
     bool running = true;
     SDL_Event event;
